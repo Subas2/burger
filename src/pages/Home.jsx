@@ -14,9 +14,7 @@ import ProductDetailModal from '../components/ui/ProductDetailModal';
 import Footer from '../components/layout/Footer.jsx';
 import Countdown from '../components/ui/Countdown';
 
-// Import 2D Assets
-import heroBurger from '../assets/hero-burger.png';
-import heroCake from '../assets/hero-cake.png';
+// Removed static images from file imports as requested
 
 export default function Home() {
     console.log("Home.jsx: Rendering...");
@@ -190,52 +188,21 @@ export default function Home() {
                             </motion.button>
                         </div>
 
-                        {/* 2D Assets Animation Container */}
+                        {/* Dynamic GIF Animation Container */}
                         <div className="hero-images-container" style={{ position: 'relative', height: '600px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {/* Cake - Background Element */}
                             <motion.img
-                                className="hero-cake-img"
-                                src={heroCake}
-                                alt="Yummy Cake"
-                                initial={{ opacity: 0, scale: 0.5, x: 50 }}
-                                // Floating Animation (Opposite phase)
-                                animate={{
-                                    opacity: 1,
-                                    scale: 0.7,
-                                    x: 0,
-                                    y: [0, 30, 0],
-                                    rotate: [0, -5, 0]
-                                }}
-                                transition={{
-                                    duration: 7,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    delay: 0.5,
-                                    opacity: { duration: 0.8, delay: 0.4 },
-                                    scale: { duration: 0.8, delay: 0.4 },
-                                    x: { duration: 0.8, delay: 0.4 }
-                                }}
-                            />
-
-                            {/* Burger - Main Hero */}
-                            <motion.img
-                                className="hero-burger-img"
-                                src={heroImage || heroBurger}
-                                alt="Delicious Burger"
+                                className="hero-gif-img"
+                                src="https://media.tenor.com/x8v1oNUOmg4AAAAd/burger-cheeseburger.gif"
+                                alt="Delicious Animated Burger"
                                 initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                                // Floating Animation
-                                animate={{
-                                    opacity: 1,
-                                    scale: 1,
-                                    y: [0, -25, 0],
-                                    rotate: [0, 2, 0]
-                                }}
-                                transition={{
-                                    duration: 6,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    opacity: { duration: 0.8, delay: 0.2 },
-                                    scale: { duration: 0.8, delay: 0.2 }
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 1, ease: "easeOut" }}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '500px',
+                                    height: 'auto',
+                                    objectFit: 'contain',
+                                    filter: 'drop-shadow(0 20px 40px rgba(255,107,53,0.3))'
                                 }}
                             />
                         </div>
@@ -381,26 +348,14 @@ export default function Home() {
                     /* Mobile Responsive Images - Show both diagonally */
                     .hero-images-container {
                         height: 350px !important;
-                        align-items: flex-end !important;
-                        justify-content: flex-start !important;
+                        align-items: center !important;
+                        justify-content: center !important;
                     }
                     
-                    .hero-burger-img {
-                        width: 70% !important;
-                        max-width: 300px !important;
+                    .hero-gif-img {
+                        width: 90% !important;
+                        max-width: 350px !important;
                         height: auto !important;
-                        margin-bottom: 2rem;
-                        z-index: 2;
-                    }
-                    
-                    .hero-cake-img {
-                        width: 55% !important;
-                        max-width: 250px !important;
-                        height: auto !important;
-                        right: 0 !important;
-                        top: 15% !important;
-                        z-index: 1;
-                        display: block !important;
                     }
                     
                      /* Button Center */
