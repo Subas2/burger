@@ -304,7 +304,16 @@ export default function Home() {
                     }
                     
                     h1 {
-                        font-size: 3rem !important;
+                        font-size: 2.5rem !important;
+                        line-height: 1.1 !important;
+                        margin-bottom: 1rem !important;
+                    }
+
+                    .hero-text p {
+                        font-size: 1rem !important;
+                        line-height: 1.4 !important;
+                        margin-bottom: 1.5rem !important;
+                        padding: 0 1rem;
                     }
                     
                     .hero-btn {
