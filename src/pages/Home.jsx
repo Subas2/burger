@@ -84,20 +84,20 @@ export default function Home() {
                         gridTemplateColumns: '1fr',
                         padding: '6rem 4rem 4rem 4rem',
                         alignItems: 'center',
-                        justifyItems: 'center',
-                        textAlign: 'center',
+                        justifyItems: 'flex-start',
+                        textAlign: 'left',
                         zIndex: 1,
                         gap: '2rem',
                         minHeight: '600px'
                     }}>
                         {/* Text Content */}
-                        <div className="hero-text" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div className="hero-text" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                             <motion.h1
                                 initial={{ opacity: 1, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1 }}
                                 style={{
-                                    fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
+                                    fontSize: 'clamp(2rem, 5vw, 4.5rem)',
                                     fontWeight: 800,
                                     lineHeight: 0.95,
                                     marginBottom: '2rem',
@@ -304,28 +304,28 @@ export default function Home() {
                     }
                     
                     h1 {
-                        font-size: 2.5rem !important;
+                        font-size: 2.2rem !important;
                         line-height: 1.1 !important;
                         margin-bottom: 1rem !important;
                     }
 
                     .hero-text p {
-                        font-size: 1rem !important;
+                        font-size: 0.95rem !important;
                         line-height: 1.4 !important;
                         margin-bottom: 1.5rem !important;
-                        padding: 0 1rem;
+                        padding: 0;
                     }
                     
                     .hero-btn {
-                        padding: 1rem 2rem !important;
+                        padding: 0.8rem 2rem !important;
                         font-size: 1rem !important;
-                        width: 100%;
-                        justify-content: center;
+                        width: auto;
+                        justify-content: flex-start;
                     }
                     
-                     /* Button Center */
+                     /* Button Align Left */
                     button {
-                        margin: 0 auto;
+                        margin: 0;
                     }
                   }
             `}</style>
