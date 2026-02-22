@@ -18,6 +18,22 @@
   --border-radius: 16px;
 }
 
+/* Responsive Product Grid */
+.product-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    /* Force 3 columns on mobile screens */
+    grid-template-columns: repeat(3, 1fr);
+    /* Reduce gap on mobile so 3 items fit better securely */
+    gap: 0.5rem;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

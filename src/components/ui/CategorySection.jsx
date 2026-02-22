@@ -17,11 +17,7 @@ export default function CategorySection({ title, items, onItemClick }) {
                 {title}
             </h2>
 
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '2rem'
-            }}>
+            <div className="product-grid">
                 {items.map(product => (
                     <ProductCard
                         key={product.id}
