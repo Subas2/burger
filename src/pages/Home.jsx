@@ -183,6 +183,47 @@ export default function Home() {
                     </motion.div>
                 </section >
 
+                {/* Horizontal Category Scroll */}
+                <div className="category-scroll-container" style={{
+                    width: '100%',
+                    padding: '1rem',
+                    background: 'var(--color-bg)',
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    overflowX: 'auto',
+                    WebkitOverflowScrolling: 'touch',
+                    scrollbarWidth: 'none', // Firefox
+                    msOverflowStyle: 'none' // IE
+                }}>
+                    <style>{`
+                        .category-scroll-container::-webkit-scrollbar { display: none; }
+                        .category-pill {
+                            padding: 0.8rem 1.5rem;
+                            background: rgba(255,255,255,0.05);
+                            border: 1px solid rgba(255,255,255,0.1);
+                            border-radius: 50px;
+                            color: white;
+                            font-weight: 600;
+                            white-space: nowrap;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            font-size: 0.9rem;
+                        }
+                        .category-pill:hover {
+                            background: var(--color-primary);
+                            color: white;
+                            border-color: var(--color-primary);
+                        }
+                    `}</style>
+                    <div className="category-pill" onClick={() => document.getElementById('burgers-section')?.scrollIntoView({ behavior: 'smooth' })}>🍔 Burgers</div>
+                    <div className="category-pill" onClick={() => document.getElementById('cakes-section')?.scrollIntoView({ behavior: 'smooth' })}>🎂 Cakes</div>
+                    <div className="category-pill" onClick={() => document.getElementById('pastries-section')?.scrollIntoView({ behavior: 'smooth' })}>🥐 Pastries</div>
+                    <div className="category-pill" onClick={() => document.getElementById('biscuits-section')?.scrollIntoView({ behavior: 'smooth' })}>🍪 Biscuits</div>
+                    <div className="category-pill" onClick={() => document.getElementById('sweets-section')?.scrollIntoView({ behavior: 'smooth' })}>🍬 Sweets</div>
+                </div>
+
                 {/* Offers & Trending Section */}
                 <section id="menu-section" style={{
                     minHeight: '100vh',
@@ -261,11 +302,11 @@ export default function Home() {
 
                     {/* Full Categorized Lists (Collapsed/Below) */}
                     <div>
-                        <CategorySection title="Signature Burgers" items={burgers} onItemClick={setSelectedProduct} />
-                        <CategorySection title="Delicious Cakes" items={cakes} onItemClick={setSelectedProduct} />
-                        <CategorySection title="Pies & Pastries" items={bakeryItems} onItemClick={setSelectedProduct} />
-                        <CategorySection title="Biscuits & Cookies" items={biscuits} onItemClick={setSelectedProduct} />
-                        <CategorySection title="Sweets & Candy" items={sweets} onItemClick={setSelectedProduct} />
+                        <div id="burgers-section"><CategorySection title="Signature Burgers" items={burgers} onItemClick={setSelectedProduct} /></div>
+                        <div id="cakes-section"><CategorySection title="Delicious Cakes" items={cakes} onItemClick={setSelectedProduct} /></div>
+                        <div id="pastries-section"><CategorySection title="Pies & Pastries" items={bakeryItems} onItemClick={setSelectedProduct} /></div>
+                        <div id="biscuits-section"><CategorySection title="Biscuits & Cookies" items={biscuits} onItemClick={setSelectedProduct} /></div>
+                        <div id="sweets-section"><CategorySection title="Sweets & Candy" items={sweets} onItemClick={setSelectedProduct} /></div>
                     </div>
                 </section>
 
