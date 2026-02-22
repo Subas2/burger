@@ -304,12 +304,12 @@ export default function TrackOrder() {
                         .timeline-container {
                             flex-direction: column;
                             gap: 2rem;
-                            padding-left: 20px;
+                            padding-left: 0;
                         }
                         .timeline-line {
                             width: 2px;
                             height: 100%;
-                            left: 44px; /* Align with icon center */
+                            left: 24px; /* Align with icon center (50px / 2 - 1px) */
                             top: 0;
                         }
                         .timeline-step {

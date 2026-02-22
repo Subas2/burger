@@ -40,6 +40,7 @@ export default function CartSidebar({ isOpen, onClose }) {
 
                     {/* Sidebar */}
                     <motion.div
+                        className="cart-sidebar"
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
@@ -60,6 +61,26 @@ export default function CartSidebar({ isOpen, onClose }) {
                             borderLeft: '1px solid rgba(255,255,255,0.1)'
                         }}
                     >
+                        <style>{`
+                            @media (max-width: 600px) {
+                                .cart-sidebar {
+                                    padding: 1.2rem !important;
+                                }
+                                .cart-sidebar h2 {
+                                    font-size: 1.4rem !important;
+                                }
+                                .cart-item-card {
+                                    padding: 0.8rem !important;
+                                    gap: 0.5rem !important;
+                                }
+                                .cart-item-card h4 {
+                                    font-size: 0.95rem !important;
+                                }
+                                .cart-item-card button {
+                                    padding: 0.2rem !important;
+                                }
+                            }
+                        `}</style>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                             <h2 style={{ fontSize: '1.8rem', fontFamily: 'var(--font-main)', fontWeight: 700 }}>Your Bag ({cartCount})</h2>
                             <button onClick={onClose} style={{ color: 'white', padding: '0.5rem', background: 'rgba(255,255,255,0.1)', borderRadius: '50%' }}>
@@ -75,7 +96,7 @@ export default function CartSidebar({ isOpen, onClose }) {
                                 </div>
                             ) : (
                                 items.map(item => (
-                                    <div key={item.id} style={{
+                                    <div key={item.id} className="cart-item-card" style={{
                                         background: 'rgba(255,255,255,0.05)',
                                         padding: '1rem',
                                         borderRadius: '12px',

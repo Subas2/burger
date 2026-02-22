@@ -131,9 +131,23 @@ export default function ProductDetailModal({ product, onClose, onProductSelect }
                 >
                     <style>{`
                         @media (max-width: 900px) {
-                            div[class*="glass-panel"] {
+                            .glass-panel {
                                 grid-template-columns: 1fr !important;
                                 max-height: 85vh !important;
+                            }
+                            .modal-img-section {
+                                padding: 1.5rem !important;
+                                min-height: 200px !important;
+                            }
+                            .modal-details-section {
+                                padding: 1.2rem !important;
+                                gap: 1rem !important;
+                            }
+                            .modal-title {
+                                font-size: 1.8rem !important;
+                            }
+                            .modal-price {
+                                font-size: 2rem !important;
                             }
                         }
                     `}</style>
@@ -162,7 +176,7 @@ export default function ProductDetailModal({ product, onClose, onProductSelect }
                     </button>
 
                     {/* Image Section */}
-                    <div style={{
+                    <div className="modal-img-section" style={{
                         position: 'relative',
                         background: `linear-gradient(135deg, ${product.color}20, transparent)`,
                         display: 'flex',
@@ -211,7 +225,7 @@ export default function ProductDetailModal({ product, onClose, onProductSelect }
                     </div>
 
                     {/* Details Section */}
-                    <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2rem', overflowY: 'auto', maxHeight: '90vh' }}>
+                    <div className="modal-details-section" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2rem', overflowY: 'auto', maxHeight: '90vh' }}>
 
                         {/* Header info */}
                         <div>
@@ -231,16 +245,16 @@ export default function ProductDetailModal({ product, onClose, onProductSelect }
                                     <Star size={14} fill="#FFD700" color="#FFD700" /> {product.rating || 'New'} ({reviews.length} reviews)
                                 </span>
                             </div>
-                            <h2 style={{ fontSize: '2.5rem', lineHeight: 1.1, marginBottom: '0.5rem', fontFamily: 'var(--font-main)' }}>{product.name}</h2>
-                            <p style={{ opacity: 0.7, lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{product.description || "No description available for this delicious item."}</p>
+                            <h2 className="modal-title" style={{ fontSize: '2.5rem', lineHeight: 1.1, marginBottom: '0.5rem', fontFamily: 'var(--font-main)' }}>{product.name}</h2>
+                            <p style={{ opacity: 0.7, lineHeight: 1.6, whiteSpace: 'pre-wrap', fontSize: '0.95rem' }}>{product.description || "No description available for this delicious item."}</p>
                         </div>
 
                         {/* Price & Cart Actions */}
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <div>
-                                    {discount > 0 && <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: '1rem', display: 'block' }}>₹{originalPrice}</span>}
-                                    <span style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--color-primary)' }}>₹{discountedPrice.toFixed(0)}</span>
+                                    {discount > 0 && <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: '0.9rem', display: 'block' }}>₹{originalPrice}</span>}
+                                    <span className="modal-price" style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--color-primary)' }}>₹{discountedPrice.toFixed(0)}</span>
                                 </div>
 
                                 <div style={{

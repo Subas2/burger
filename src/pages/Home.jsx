@@ -121,7 +121,7 @@ export default function Home() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1 }}
                                 style={{
-                                    fontSize: 'clamp(4rem, 7vw, 6.5rem)',
+                                    fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
                                     fontWeight: 800,
                                     lineHeight: 0.95,
                                     marginBottom: '2rem',
@@ -162,6 +162,7 @@ export default function Home() {
                             </motion.p>
 
                             <motion.button
+                                className="hero-btn"
                                 initial={{ opacity: 1 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5 }}
@@ -366,7 +367,14 @@ export default function Home() {
                     }
                     
                     h1 {
-                        font-size: 3.5rem !important;
+                        font-size: 3rem !important;
+                    }
+                    
+                    .hero-btn {
+                        padding: 1rem 2rem !important;
+                        font-size: 1rem !important;
+                        width: 100%;
+                        justify-content: center;
                     }
                     
                     div[style*="maxWidth: 600px"] {

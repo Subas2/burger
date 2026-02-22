@@ -154,7 +154,7 @@ export default function Checkout() {
                     <ArrowLeft size={20} /> Back to Shop
                 </button>
 
-                <h1 style={{ fontSize: '3rem', marginBottom: '3rem', fontFamily: 'var(--font-main)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <h1 className="checkout-title" style={{ fontSize: '3rem', marginBottom: '3rem', fontFamily: 'var(--font-main)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     Checkout <span style={{ fontSize: '1.2rem', opacity: 0.5, fontWeight: 'normal', marginTop: '1rem' }}>({items.length} items)</span>
                 </h1>
 
@@ -531,9 +531,16 @@ export default function Checkout() {
                     div[style*="padding-top: 120px"] {
                         padding-top: 100px !important;
                     }
-                    h1 {
+                    .checkout-title {
                         font-size: 2.2rem !important;
                     }
+                  }
+
+                  @media (max-width: 600px) {
+                      .checkout-container {
+                          padding-left: 1rem !important;
+                          padding-right: 1rem !important;
+                      }
                   }
 
                   .city-zip-grid {
