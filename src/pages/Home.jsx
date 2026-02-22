@@ -273,12 +273,7 @@ export default function Home() {
                         <h2 style={{ fontSize: '2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
                         </h2>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: isSingleOffer ? '1fr' : 'repeat(auto-fit, minmax(260px, 1fr))',
-                            gap: '1.5rem',
-                            justifyItems: isSingleOffer ? 'center' : 'auto'
-                        }}>
+                        <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
                             {/* Combine all, filter by discount */}
                             {offers.map(product => (
                                 <div key={product.id} style={{
@@ -319,11 +314,7 @@ export default function Home() {
                         <h2 style={{ fontSize: '3rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Star fill="gold" stroke="none" /> Best Sellers
                         </h2>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                            gap: '1.5rem'
-                        }}>
+                        <div className="product-grid">
                             {/* Best Sellers Logic */}
                             {[...burgers, ...cakes, ...bakeryItems, ...sweets, ...biscuits].filter(p => p.trending).slice(0, 4).map(product => (
                                 <ProductCard
