@@ -32,6 +32,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
 
     return (
         <motion.div
+            className="product-card"
             whileHover={{ y: -8, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             style={{
@@ -62,7 +63,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
             {/* Glare Effect Optional (Removed the dynamic light for simpler smooth animation) */}
             {/* Discount Badge */}
             {hasDiscount && (
-                <div style={{
+                <div className="product-badge" style={{
                     position: 'absolute',
                     top: isBanner ? '1.5rem' : '0.8rem',
                     left: isBanner ? '1.5rem' : '0.8rem',
@@ -84,6 +85,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
 
             {/* Favorite Toggle */}
             <button
+                className="product-fav-btn"
                 onClick={(e) => {
                     e.stopPropagation();
                     toggleFavorite(product);
@@ -113,7 +115,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
                 />
             </button>
 
-            <div style={{
+            <div className="product-img-container" style={{
                 height: imageHeight,
                 width: '100%',
                 display: 'flex',
@@ -141,18 +143,18 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
                         style={{ width: '100%', height: '100%', objectFit: imageObjectFit, zIndex: 1, filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))' }}
                     />
                 ) : (
-                    <span style={{ fontSize: isBanner ? '8rem' : '4rem', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))', zIndex: 1 }}>
+                    <span className="product-img-fallback" style={{ fontSize: isBanner ? '8rem' : '4rem', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))', zIndex: 1 }}>
                         {isBurger ? '🍔' : '🍩'}
                     </span>
                 )}
             </div>
 
             {/* Product Details */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: isBanner ? '0.5rem' : '0.2rem' }}>
-                <h3 style={{ margin: 0, fontFamily: 'var(--font-main)', fontSize: isBanner ? '2.5rem' : '1.2rem', lineHeight: 1.1, textAlign: isBanner ? 'center' : 'left' }}>{product.name}</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: isBanner ? '0.5rem' : '0.2rem', overflow: 'hidden' }}>
+                <h3 className="product-title" style={{ margin: 0, fontFamily: 'var(--font-main)', fontSize: isBanner ? '2.5rem' : '1.2rem', lineHeight: 1.1, textAlign: isBanner ? 'center' : 'left' }}>{product.name}</h3>
 
                 {/* Stats */}
-                <div style={{ display: 'flex', gap: '0.8rem', fontSize: '0.75rem', opacity: 0.7, justifyContent: isBanner ? 'center' : 'flex-start' }}>
+                <div className="product-stats" style={{ display: 'flex', gap: '0.8rem', fontSize: '0.75rem', opacity: 0.7, justifyContent: isBanner ? 'center' : 'flex-start' }}>
                     {product.calories && <span>🔥 {product.calories}</span>}
 
                     <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
@@ -170,7 +172,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
                     </div>
                 </div>
 
-                <p style={{ fontSize: isBanner ? '1rem' : '0.8rem', opacity: 0.6, lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: isBanner ? 3 : 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', margin: 0, textAlign: isBanner ? 'center' : 'left' }}>
+                <p className="product-desc" style={{ fontSize: isBanner ? '1rem' : '0.8rem', opacity: 0.6, lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: isBanner ? 3 : 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', margin: 0, textAlign: isBanner ? 'center' : 'left' }}>
                     {product.description}
                 </p>
             </div>
@@ -181,31 +183,32 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 'auto' }}>
                 <div>
                     {hasDiscount && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', opacity: 0.6, fontSize: isBanner ? '1rem' : '0.8rem', marginBottom: '0.1rem' }}>
+                        <div className="product-price-original" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', opacity: 0.6, fontSize: isBanner ? '1rem' : '0.8rem', marginBottom: '0.1rem' }}>
                             <span style={{ textDecoration: 'line-through' }}>₹{originalPrice.toFixed(0)}</span>
                             <span style={{ color: 'var(--color-secondary)' }}>Save ₹{(originalPrice - discountedPrice).toFixed(0)}</span>
                         </div>
                     )}
-                    <div style={{ fontSize: isBanner ? '2.5rem' : '1.4rem', fontWeight: 800, color: 'white', lineHeight: 1 }}>
+                    <div className="product-price-container" style={{ fontSize: isBanner ? '2.5rem' : '1.4rem', fontWeight: 800, color: 'white', lineHeight: 1 }}>
                         ₹{discountedPrice.toFixed(0)}
-                        <span style={{ fontSize: '0.9rem', opacity: 0.5, fontWeight: 400 }}>.99</span>
+                        <span style={{ fontSize: '0.9em', opacity: 0.5, fontWeight: 400 }}>.99</span>
                     </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <div style={{
+                    <div className="product-quantity-controls" style={{
                         display: 'flex',
                         alignItems: 'center',
                         background: 'rgba(255,255,255,0.05)',
                         borderRadius: '16px',
                         padding: '0.1rem',
                     }} onClick={e => e.stopPropagation()}>
-                        <button onClick={(e) => handleQuantityChange(e, -1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: '0.4rem' }}><Minus size={12} /></button>
+                        <button onClick={(e) => handleQuantityChange(e, -1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: '0.4rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Minus size={12} /></button>
                         <span style={{ fontWeight: 600, minWidth: '1rem', textAlign: 'center', fontSize: '0.9rem' }}>{quantity}</span>
-                        <button onClick={(e) => handleQuantityChange(e, 1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: '0.4rem' }}><Plus size={12} /></button>
+                        <button onClick={(e) => handleQuantityChange(e, 1)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', padding: '0.4rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Plus size={12} /></button>
                     </div>
 
                     <button
+                        className="product-add-btn"
                         onClick={(e) => {
                             e.stopPropagation();
                             addToCart(product, quantity);
