@@ -13,9 +13,6 @@ import ProductCard from '../components/ui/ProductCard';
 import ProductDetailModal from '../components/ui/ProductDetailModal';
 import Footer from '../components/layout/Footer.jsx';
 import Countdown from '../components/ui/Countdown';
-// Import 2D Assets
-import heroBurger from '../assets/hero-burger.png';
-import heroCake from '../assets/hero-cake.png';
 export default function Home() {
     console.log("Home.jsx: Rendering...");
     const { addToCart } = useCart();
@@ -107,14 +104,17 @@ export default function Home() {
                         maxWidth: '1400px',
                         width: '100%',
                         display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        padding: '0 4rem',
+                        gridTemplateColumns: '1fr',
+                        padding: '6rem 4rem 4rem 4rem',
                         alignItems: 'center',
+                        justifyItems: 'center',
+                        textAlign: 'center',
                         zIndex: 1,
-                        gap: '4rem'
+                        gap: '2rem',
+                        minHeight: '600px'
                     }}>
                         {/* Text Content */}
-                        <div className="hero-text" style={{ position: 'relative', zIndex: 2 }}>
+                        <div className="hero-text" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <motion.h1
                                 initial={{ opacity: 1, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -188,87 +188,40 @@ export default function Home() {
                             </motion.button>
                         </div>
 
-                        {/* 2D Assets Animation Container */}
-                        <div className="hero-images-container" style={{ position: 'relative', height: '600px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {/* Cake - Background Element */}
-                            <motion.img
-                                className="hero-cake-img"
-                                src={heroCake}
-                                alt="Yummy Cake"
-                                initial={{ opacity: 0, scale: 0.5, x: 50 }}
-                                // Floating Animation (Opposite phase)
-                                animate={{
-                                    opacity: 1,
-                                    scale: 0.7,
-                                    x: 0,
-                                    y: [0, 30, 0],
-                                    rotate: [0, -5, 0]
-                                }}
-                                transition={{
-                                    duration: 7,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    delay: 0.5,
-                                    opacity: { duration: 0.8, delay: 0.4 },
-                                    scale: { duration: 0.8, delay: 0.4 },
-                                    x: { duration: 0.8, delay: 0.4 }
-                                }}
-                            />
-
-                            {/* Burger - Main Hero */}
-                            <motion.img
-                                className="hero-burger-img"
-                                src={heroImage || heroBurger}
-                                alt="Delicious Burger"
-                                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                                // Floating Animation
-                                animate={{
-                                    opacity: 1,
-                                    scale: 1,
-                                    y: [0, -25, 0],
-                                    rotate: [0, 2, 0]
-                                }}
-                                transition={{
-                                    duration: 6,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    opacity: { duration: 0.8, delay: 0.2 },
-                                    scale: { duration: 0.8, delay: 0.2 }
-                                }}
-                            />
-                        </div>
                     </div>
+            </div>
 
-                    <motion.div
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        style={{
-                            position: 'absolute',
-                            bottom: '2rem',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            opacity: 0.5,
-                            cursor: 'pointer'
-                        }}
-                        onClick={scrollToMenu}
-                    >
-                        <ChevronDown size={32} />
-                    </motion.div>
-                </section>
+            <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                style={{
+                    position: 'absolute',
+                    bottom: '2rem',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    opacity: 0.5,
+                    cursor: 'pointer'
+                }}
+                onClick={scrollToMenu}
+            >
+                <ChevronDown size={32} />
+            </motion.div>
+        </section >
 
-                {/* Offers & Trending Section */}
-                <section id="menu-section" style={{
-                    minHeight: '100vh',
-                    background: 'var(--color-bg)',
-                    position: 'relative',
+            {/* Offers & Trending Section */ }
+            < section id = "menu-section" style = {{
+        minHeight: '100vh',
+            background: 'var(--color-bg)',
+                position: 'relative',
                     marginTop: '0',
-                    // scrollSnapAlign: 'start',
-                    paddingBottom: '100px',
-                    paddingTop: '6rem'
-                }}>
+                        // scrollSnapAlign: 'start',
+                        paddingBottom: '100px',
+                            paddingTop: '6rem'
+    }
+}>
 
-                    {/* Special Offers Banner */}
-                    <div style={{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
+    {/* Special Offers Banner */ }
+    < div style = {{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
                             <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
                                 <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
@@ -311,10 +264,10 @@ export default function Home() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div >
 
-                    {/* Best Sellers */}
-                    <div style={{ maxWidth: '1400px', margin: '0 auto 0.4rem auto', padding: '0 var(--padding-page)' }}>
+    {/* Best Sellers */ }
+    < div style = {{ maxWidth: '1400px', margin: '0 auto 0.4rem auto', padding: '0 var(--padding-page)' }}>
                         <h2 style={{ fontSize: '3rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Star fill="gold" stroke="none" /> Best Sellers
                         </h2>
@@ -328,41 +281,27 @@ export default function Home() {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </div >
 
 
 
-                    {/* Full Categorized Lists (Collapsed/Below) */}
-                    <div>
+    {/* Full Categorized Lists (Collapsed/Below) */ }
+    < div >
                         <CategorySection title="Signature Burgers" items={burgers} onItemClick={setSelectedProduct} />
                         <CategorySection title="Delicious Cakes" items={cakes} onItemClick={setSelectedProduct} />
                         <CategorySection title="Pies & Pastries" items={bakeryItems} onItemClick={setSelectedProduct} />
                         <CategorySection title="Biscuits & Cookies" items={biscuits} onItemClick={setSelectedProduct} />
                         <CategorySection title="Sweets & Candy" items={sweets} onItemClick={setSelectedProduct} />
-                    </div>
-                </section>
+                    </div >
+                </section >
 
-                {/* Mobile adjustments */}
-                <style>{`
+    {/* Mobile adjustments */ }
+    < style > {`
                   @media (max-width: 968px) {
                     .hero-grid {
-                        grid-template-columns: 1fr !important;
-                        text-align: center;
-                        padding: 0 1.5rem !important;
-                        gap: 2rem !important;
+                        padding: 4rem 1.5rem !important;
                         margin-top: 60px;
-                    }
-                    /* Container swap for mobile: text below image */
-                    .hero-grid > .hero-text {
-                        order: 2;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                    }
-                    .hero-grid > .hero-images-container {
-                        order: 1;
-                        height: 350px !important;
-                        margin-bottom: 2rem;
+                        minHeight: 'auto' !important;
                     }
                     
                     h1 {
@@ -376,49 +315,26 @@ export default function Home() {
                         justify-content: center;
                     }
                     
-                    /* Mobile Responsive Images - Show both diagonally */
-                    .hero-images-container {
-                        height: 350px !important;
-                        align-items: flex-end !important;
-                        justify-content: flex-start !important;
-                    }
-                    
-                    .hero-burger-img {
-                        width: 70% !important;
-                        max-width: 300px !important;
-                        height: auto !important;
-                        margin-bottom: 2rem;
-                        z-index: 2;
-                    }
-                    
-                    .hero-cake-img {
-                        width: 55% !important;
-                        max-width: 250px !important;
-                        height: auto !important;
-                        right: 0 !important;
-                        top: 15% !important;
-                        z-index: 1;
-                        display: block !important;
-                    }
-                    
                      /* Button Center */
                     button {
                         margin: 0 auto;
                     }
                   }
-                `}</style>
+                `}</style >
 
-                <Footer />
-            </div>
+    <Footer />
+            </div >
 
-            {/* Product Detail Modal */}
-            {selectedProduct && (
-                <ProductDetailModal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
-                    onProductSelect={setSelectedProduct}
-                />
-            )}
+    {/* Product Detail Modal */ }
+{
+    selectedProduct && (
+        <ProductDetailModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onProductSelect={setSelectedProduct}
+        />
+    )
+}
         </>
     );
 }
