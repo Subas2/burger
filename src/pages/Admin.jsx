@@ -1097,6 +1097,7 @@ export default function Admin() {
     // Edit Mode State
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     // Simple Form State
     const [newProduct, setNewProduct] = useState({
@@ -1188,14 +1189,35 @@ export default function Admin() {
         setActiveView('inventory');
     };
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setNewProduct(prev => ({ ...prev, image: reader.result }));
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+
+        setUploadingImage(true);
+        addToast('Uploading image to cloud...', 'info');
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'burger_bakery_assets');
+
+        try {
+            const response = await fetch('https://api.cloudinary.com/v1_1/dngibvt2q/image/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.secure_url) {
+                setNewProduct(prev => ({ ...prev, image: data.secure_url }));
+                addToast('Image uploaded successfully!', 'success');
+            } else {
+                addToast('Failed to upload image', 'error');
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            addToast('Error uploading image', 'error');
+        } finally {
+            setUploadingImage(false);
         }
     };
 
@@ -1598,12 +1620,17 @@ export default function Admin() {
                                                 OR
                                                 <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', flex: 1 }}></div>
                                             </div>
-                                            <label className="admin-btn btn-secondary" style={{ cursor: 'pointer', justifyContent: 'center' }}>
-                                                <Image size={18} /> Upload from Device
+                                            <label className="admin-btn btn-secondary" style={{ cursor: uploadingImage ? 'not-allowed' : 'pointer', justifyContent: 'center', opacity: uploadingImage ? 0.7 : 1 }}>
+                                                {uploadingImage ? (
+                                                    <>Uploading to Cloud...</>
+                                                ) : (
+                                                    <><Image size={18} /> Upload from Device</>
+                                                )}
                                                 <input
                                                     type="file"
                                                     accept="image/*"
                                                     onChange={handleImageUpload}
+                                                    disabled={uploadingImage}
                                                     style={{ display: 'none' }}
                                                 />
                                             </label>
