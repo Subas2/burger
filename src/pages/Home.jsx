@@ -52,8 +52,7 @@ export default function Home() {
             <div style={{ minHeight: '100vh', paddingBottom: '2rem' }}>
 
                 {/* Hero Section */}
-                <section style={{
-                    height: '100vh',
+                <section className="hero-section" style={{
                     width: '100%',
                     position: 'relative',
                     display: 'flex',
@@ -282,7 +281,16 @@ export default function Home() {
 
                 {/* Mobile adjustments */}
                 <style>{`
+                  .hero-section {
+                      height: 100vh;
+                  }
+
                   @media (max-width: 968px) {
+                    .hero-section {
+                        height: 65vh !important;
+                        min-height: 450px !important;
+                    }
+
                     .hero-grid {
                         padding: 4rem 1.5rem !important;
                         margin-top: 60px;
