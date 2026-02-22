@@ -35,30 +35,30 @@ body {
 
 @media (max-width: 768px) {
   .product-grid {
-    /* Force 3 columns on mobile screens */
-    grid-template-columns: repeat(3, 1fr);
-    /* Reduce gap on mobile so 3 items fit better securely */
-    gap: 0.25rem;
+    /* Force 2 columns on mobile screens for better readability */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
 
-  /* Micro classes for 3-column mobile squeeze */
+  /* Cleaner 2-column mobile layout */
   .product-card {
-    padding: 0.25rem !important;
-    gap: 0.15rem !important;
-    border-radius: 8px !important;
+    padding: 0.8rem !important;
+    gap: 0.5rem !important;
+    border-radius: 12px !important;
   }
 
   .product-img-container {
-    height: 60px !important;
-    margin-top: 0.1rem !important;
+    height: 100px !important;
+    /* Forces all cards to be nicely 50% smaller on mobile as requested */
+    margin-top: 0.2rem !important;
   }
 
   .product-img-fallback {
-    font-size: 1.5rem !important;
+    font-size: 3rem !important;
   }
 
   .product-title {
-    font-size: 0.55rem !important;
+    font-size: 0.9rem !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -66,16 +66,14 @@ body {
 
   .product-desc {
     display: none !important;
-    /* Hide description entirely to save space */
   }
 
   .product-stats {
-    display: none !important;
-    /* Hide stats entirely to save space */
+    display: flex !important;
   }
 
   .product-price-container {
-    font-size: 0.65rem !important;
+    font-size: 0.9rem !important;
   }
 
   .product-price-original {
@@ -83,55 +81,55 @@ body {
   }
 
   .product-quantity-controls {
-    padding: 0 !important;
-    border-radius: 4px !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 6px !important;
   }
 
   .product-quantity-controls button {
-    padding: 0.1rem !important;
+    padding: 0.2rem !important;
   }
 
   .product-quantity-controls button svg {
-    width: 8px !important;
-    height: 8px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .product-quantity-controls span {
-    font-size: 0.5rem !important;
-    min-width: 0.6rem !important;
+    font-size: 0.9rem !important;
+    min-width: 1rem !important;
   }
 
   .product-add-btn {
-    width: 18px !important;
-    height: 18px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
 
   .product-add-btn svg {
-    width: 10px !important;
-    height: 10px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 
   .product-fav-btn {
-    width: 16px !important;
-    height: 16px !important;
-    top: 4px !important;
-    right: 4px !important;
+    width: 24px !important;
+    height: 24px !important;
+    top: 8px !important;
+    right: 8px !important;
   }
 
   .product-fav-btn svg {
-    width: 8px !important;
-    height: 8px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .product-badge {
-    font-size: 0.4rem !important;
-    padding: 0.1rem 0.2rem !important;
-    top: 4px !important;
-    left: 4px !important;
+    font-size: 0.6rem !important;
+    padding: 0.2rem 0.6rem !important;
+    top: 8px !important;
+    left: 8px !important;
   }
 
   .product-badge span {
-    font-size: 0.4rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
