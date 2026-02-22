@@ -83,32 +83,18 @@ body {
   }
 
   .product-quantity-controls {
-    padding: 0 !important;
-    border-radius: 4px !important;
-  }
-
-  .product-quantity-controls button {
-    padding: 0.1rem !important;
-  }
-
-  .product-quantity-controls button svg {
-    width: 8px !important;
-    height: 8px !important;
-  }
-
-  .product-quantity-controls span {
-    font-size: 0.5rem !important;
-    min-width: 0.6rem !important;
+    display: none !important;
+    /* Hidden on mobile micro-grid to save horizontal space */
   }
 
   .product-add-btn {
-    width: 18px !important;
-    height: 18px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
 
   .product-add-btn svg {
-    width: 10px !important;
-    height: 10px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 
   .product-fav-btn {
