@@ -36,7 +36,7 @@ export default function Navbar() {
             borderBottom: '1px solid rgba(255,255,255,0.05)'
         }}>
             <Link href="/">
-                <a style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'var(--font-main)' }}>
+                <a className="nav-logo" style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'var(--font-main)' }}>
                     <span style={{ color: 'var(--color-primary)' }}>BURGER</span> &
                     <span style={{ color: 'var(--color-secondary)' }}>BAKERY</span>
                 </a>
@@ -175,7 +175,13 @@ export default function Navbar() {
 
             <style>{`
         @media (max-width: 768px) {
-          .main-nav { flex-direction: row-reverse; }
+          .main-nav { 
+            flex-direction: row-reverse; 
+            padding: 0.8rem 1rem !important; 
+          }
+          .nav-logo {
+            font-size: 1.2rem !important;
+          }
           .desktop-menu { display: none !important; }
           .mobile-toggle { display: block !important; }
         }
