@@ -195,7 +195,9 @@ export default function Home() {
                     overflowX: 'auto',
                     WebkitOverflowScrolling: 'touch',
                     scrollbarWidth: 'none', // Firefox
-                    msOverflowStyle: 'none' // IE
+                    msOverflowStyle: 'none', // IE
+                    position: 'relative',
+                    zIndex: 20
                 }}>
                     <style>{`
                         .category-scroll-container::-webkit-scrollbar { display: none; }
