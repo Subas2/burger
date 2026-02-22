@@ -104,7 +104,7 @@ export default function Home() {
                     {/* Gradient Overlay for texture */}
                     <div className="noise-overlay" style={{ opacity: 0.05 }} />
 
-                    <div style={{
+                    <div className="hero-grid" style={{
                         maxWidth: '1400px',
                         width: '100%',
                         display: 'grid',
@@ -115,7 +115,7 @@ export default function Home() {
                         gap: '4rem'
                     }}>
                         {/* Text Content */}
-                        <div style={{ position: 'relative', zIndex: 2 }}>
+                        <div className="hero-text" style={{ position: 'relative', zIndex: 2 }}>
                             <motion.h1
                                 initial={{ opacity: 1, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -341,7 +341,7 @@ export default function Home() {
                 {/* Mobile adjustments */}
                 <style>{`
                   @media (max-width: 968px) {
-                    div[style*="gridTemplateColumns"] {
+                    .hero-grid {
                         grid-template-columns: 1fr !important;
                         text-align: center;
                         padding: 0 1.5rem !important;
@@ -349,13 +349,16 @@ export default function Home() {
                         margin-top: 60px;
                     }
                     /* Container swap for mobile: text below image */
-                    div[style*="gridTemplateColumns"] > div:first-child {
+                    .hero-grid > .hero-text {
                         order: 2;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
                     }
-                    div[style*="gridTemplateColumns"] > div:last-child {
+                    .hero-grid > .hero-images-container {
                         order: 1;
-                        height: auto !important;
-                        margin-bottom: -2rem;
+                        height: 350px !important;
+                        margin-bottom: 2rem;
                     }
                     
                     h1 {
@@ -371,21 +374,25 @@ export default function Home() {
                     
                     /* Mobile Responsive Images - Show both diagonally */
                     .hero-images-container {
-                        height: 400px !important;
+                        height: 350px !important;
                         align-items: flex-end !important;
                         justify-content: flex-start !important;
                     }
                     
                     .hero-burger-img {
-                        max-width: 65% !important;
+                        width: 70% !important;
+                        max-width: 300px !important;
+                        height: auto !important;
                         margin-bottom: 2rem;
                         z-index: 2;
                     }
                     
                     .hero-cake-img {
-                        max-width: 55% !important;
+                        width: 55% !important;
+                        max-width: 250px !important;
+                        height: auto !important;
                         right: 0 !important;
-                        top: 20% !important;
+                        top: 15% !important;
                         z-index: 1;
                         display: block !important;
                     }
