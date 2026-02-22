@@ -217,11 +217,11 @@ export default function Home() {
                             <motion.img
                                 src={heroCake}
                                 alt="Yummy Cake"
-                                initial={{ opacity: 0, scale: 0.5, x: 50 }}
+                                initial={{ opacity: 0, scale: 0.8, x: 50 }}
                                 // Floating Animation (Opposite phase)
                                 animate={{
                                     opacity: 1,
-                                    scale: 1,
+                                    scale: 1.3,
                                     x: 0,
                                     y: [0, 30, 0],
                                     rotate: [0, -5, 0]
@@ -235,6 +235,7 @@ export default function Home() {
                                     scale: { duration: 0.8, delay: 0.4 },
                                     x: { duration: 0.8, delay: 0.4 }
                                 }}
+                                style={{ zIndex: 0 }}
                             />
                         </div>
                     </div>
