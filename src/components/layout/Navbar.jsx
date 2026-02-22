@@ -21,7 +21,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav style={{
+        <nav className="main-nav" style={{
             position: 'fixed',
             top: 0,
             left: 0,
@@ -175,6 +175,7 @@ export default function Navbar() {
 
             <style>{`
         @media (max-width: 768px) {
+          .main-nav { flex-direction: row-reverse; }
           .desktop-menu { display: none !important; }
           .mobile-toggle { display: block !important; }
         }

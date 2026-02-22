@@ -5,7 +5,7 @@ import { useToast } from '../../context/ToastContext';
 import { useFavorites } from '../../context/FavoritesContext';
 import { motion } from 'framer-motion';
 
-export default function ProductCard({ product, type, imageHeight = '200px', imageObjectFit = 'cover', isBanner = false, onClick }) {
+export default function ProductCard({ product, type, imageHeight = '100px', imageObjectFit = 'cover', isBanner = false, onClick }) {
     console.log("ProductCard.jsx: Rendering", product?.name);
     const isBurger = type === 'burger';
     const accentColor = isBurger ? 'var(--color-primary)' : 'var(--color-secondary)';
@@ -39,10 +39,10 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
                 background: 'linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.2))',
                 backdropFilter: 'blur(16px)',
                 borderRadius: '20px',
-                padding: isBanner ? '2rem' : '0.8rem',
+                padding: isBanner ? '2rem' : '0.5rem',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: isBanner ? '1.5rem' : '0.6rem',
+                gap: isBanner ? '1.5rem' : '0.3rem',
                 cursor: 'pointer',
                 border: '1px solid rgba(255,255,255,0.05)',
                 position: 'relative',
@@ -140,7 +140,7 @@ export default function ProductCard({ product, type, imageHeight = '200px', imag
                     <img
                         src={product.image}
                         alt={product.name}
-                        style={{ width: '100%', height: '100%', objectFit: imageObjectFit, zIndex: 1, filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))' }}
+                        style={{ width: '100%', height: '100%', objectFit: imageObjectFit, zIndex: 1, filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))' }}
                     />
                 ) : (
                     <span className="product-img-fallback" style={{ fontSize: isBanner ? '8rem' : '4rem', filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.3))', zIndex: 1 }}>
