@@ -1184,6 +1184,8 @@ export default function Admin() {
             discount: '',
             image: ''
         });
+
+        setActiveView('inventory');
     };
 
     const handleImageUpload = (e) => {
