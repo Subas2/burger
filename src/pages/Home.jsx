@@ -58,7 +58,6 @@ export default function Home() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    paddingTop: '80px', // Add padding for Navbar
                     background: '#0a0a0a'
                 }}>
 
@@ -274,6 +273,7 @@ export default function Home() {
                 <style>{`
                   .hero-section {
                       height: 100vh;
+                      padding-top: 80px;
                   }
 
                   .hero-video {
@@ -289,36 +289,38 @@ export default function Home() {
 
                   @media (max-width: 968px) {
                     .hero-section {
-                        height: 65vh !important;
-                        min-height: 450px !important;
+                        height: 56.25vw !important; /* Pure 16:9 Aspect Ratio */
+                        min-height: 280px !important; /* Ensure enough room for text if phone is too thin */
+                        padding-top: 60px !important;
                     }
 
                     .hero-video {
-                        object-fit: contain !important;
+                        object-fit: cover !important;
                     }
 
                     .hero-grid {
-                        padding: 4rem 1.5rem !important;
-                        margin-top: 60px;
-                        minHeight: 'auto' !important;
+                        padding: 1rem 1.5rem !important;
+                        margin-top: 0px !important;
+                        minHeight: '100%' !important;
+                        gap: 0.5rem !important;
                     }
                     
                     h1 {
-                        font-size: 2.2rem !important;
+                        font-size: 1.4rem !important;
                         line-height: 1.1 !important;
-                        margin-bottom: 1rem !important;
+                        margin-bottom: 0.5rem !important;
                     }
 
                     .hero-text p {
-                        font-size: 0.95rem !important;
-                        line-height: 1.4 !important;
-                        margin-bottom: 1.5rem !important;
+                        font-size: 0.75rem !important;
+                        line-height: 1.3 !important;
+                        margin-bottom: 0.8rem !important;
                         padding: 0;
                     }
                     
                     .hero-btn {
-                        padding: 0.8rem 2rem !important;
-                        font-size: 1rem !important;
+                        padding: 0.6rem 1.2rem !important;
+                        font-size: 0.8rem !important;
                         width: auto;
                         justify-content: flex-start;
                     }
