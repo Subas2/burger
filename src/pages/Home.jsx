@@ -156,85 +156,83 @@ export default function Home() {
                         </div>
 
                     </div>
-            </div>
 
-            <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                    position: 'absolute',
-                    bottom: '2rem',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    opacity: 0.5,
-                    cursor: 'pointer'
-                }}
-                onClick={scrollToMenu}
-            >
-                <ChevronDown size={32} />
-            </motion.div>
-        </section >
+                    <motion.div
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        style={{
+                            position: 'absolute',
+                            bottom: '2rem',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            opacity: 0.5,
+                            cursor: 'pointer'
+                        }}
+                        onClick={scrollToMenu}
+                    >
+                        <ChevronDown size={32} />
+                    </motion.div>
+                </section >
 
-            {/* Offers & Trending Section */ }
-            < section id = "menu-section" style = {{
-        minHeight: '100vh',
-            background: 'var(--color-bg)',
-                position: 'relative',
+                {/* Offers & Trending Section */}
+                <section id="menu-section" style={{
+                    minHeight: '100vh',
+                    background: 'var(--color-bg)',
+                    position: 'relative',
                     marginTop: '0',
-                        // scrollSnapAlign: 'start',
-                        paddingBottom: '100px',
-                            paddingTop: '6rem'
-    }
-}>
+                    // scrollSnapAlign: 'start',
+                    paddingBottom: '100px',
+                    paddingTop: '6rem'
+                }}>
 
-    {/* Special Offers Banner */ }
-    < div style = {{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
-                        <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
-                            <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
-                        </h2>
-                        {contactInfo?.saleEndDate && (
-                            <Countdown endDate={contactInfo.saleEndDate} />
-                        )}
-                    </div>
-                    <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
-                        {/* Combine all, filter by discount */}
-                        {offers.map(product => (
-                            <div key={product.id} style={{
-                                position: 'relative',
-                                width: isSingleOffer ? '100%' : 'auto',
-                                maxWidth: isSingleOffer ? '500px' : 'none',
-                                minWidth: isSingleOffer ? '280px' : 'auto',
-                                margin: isSingleOffer ? '0 auto' : '0'
-                            }}>
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '-10px',
-                                    right: '-10px',
-                                    background: 'var(--color-secondary)',
-                                    color: 'black',
-                                    fontWeight: 'bold',
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '50px',
-                                    zIndex: 10,
-                                    boxShadow: '0 5px 15px rgba(255, 143, 171, 0.4)'
+                    {/* Special Offers Banner */}
+                    <div style={{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                            <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+                                <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
+                            </h2>
+                            {contactInfo?.saleEndDate && (
+                                <Countdown endDate={contactInfo.saleEndDate} />
+                            )}
+                        </div>
+                        <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
+                            {/* Combine all, filter by discount */}
+                            {offers.map(product => (
+                                <div key={product.id} style={{
+                                    position: 'relative',
+                                    width: isSingleOffer ? '100%' : 'auto',
+                                    maxWidth: isSingleOffer ? '500px' : 'none',
+                                    minWidth: isSingleOffer ? '280px' : 'auto',
+                                    margin: isSingleOffer ? '0 auto' : '0'
                                 }}>
-                                    {product.discount}% OFF
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '-10px',
+                                        right: '-10px',
+                                        background: 'var(--color-secondary)',
+                                        color: 'black',
+                                        fontWeight: 'bold',
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '50px',
+                                        zIndex: 10,
+                                        boxShadow: '0 5px 15px rgba(255, 143, 171, 0.4)'
+                                    }}>
+                                        {product.discount}% OFF
+                                    </div>
+                                    <ProductCard
+                                        product={product}
+                                        imageHeight={isSingleOffer ? '400px' : '300px'}
+                                        imageObjectFit="contain"
+                                        isBanner={isSingleOffer}
+                                        onClick={() => setSelectedProduct(product)}
+                                    />
                                 </div>
-                                <ProductCard
-                                    product={product}
-                                    imageHeight={isSingleOffer ? '400px' : '300px'}
-                                    imageObjectFit="contain"
-                                    isBanner={isSingleOffer}
-                                    onClick={() => setSelectedProduct(product)}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div >
+                            ))}
+                        </div>
+                    </div >
 
-    {/* Best Sellers */ }
-    < div style = {{ maxWidth: '1400px', margin: '0 auto 0.4rem auto', padding: '0 var(--padding-page)' }}>
+                    {/* Best Sellers */}
+                    <div style={{ maxWidth: '1400px', margin: '0 auto 0.4rem auto', padding: '0 var(--padding-page)' }}>
                         <h2 style={{ fontSize: '3rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Star fill="gold" stroke="none" /> Best Sellers
                         </h2>
@@ -252,18 +250,18 @@ export default function Home() {
 
 
 
-    {/* Full Categorized Lists (Collapsed/Below) */ }
-    < div >
+                    {/* Full Categorized Lists (Collapsed/Below) */}
+                    <div>
                         <CategorySection title="Signature Burgers" items={burgers} onItemClick={setSelectedProduct} />
                         <CategorySection title="Delicious Cakes" items={cakes} onItemClick={setSelectedProduct} />
                         <CategorySection title="Pies & Pastries" items={bakeryItems} onItemClick={setSelectedProduct} />
                         <CategorySection title="Biscuits & Cookies" items={biscuits} onItemClick={setSelectedProduct} />
                         <CategorySection title="Sweets & Candy" items={sweets} onItemClick={setSelectedProduct} />
-                    </div >
-                </section >
+                    </div>
+                </section>
 
-    {/* Mobile adjustments */ }
-    < style > {`
+                {/* Mobile adjustments */}
+                <style>{`
                   @media (max-width: 968px) {
                     .hero-grid {
                         padding: 4rem 1.5rem !important;
@@ -287,21 +285,20 @@ export default function Home() {
                         margin: 0 auto;
                     }
                   }
-                `}</style >
+            `}</style>
 
-    <Footer />
-            </div >
+                <Footer />
+            </div>
 
-    {/* Product Detail Modal */ }
-{
-    selectedProduct && (
-        <ProductDetailModal
-            product={selectedProduct}
-            onClose={() => setSelectedProduct(null)}
-            onProductSelect={setSelectedProduct}
-        />
-    )
-}
+            {/* Product Detail Modal */}
+            {selectedProduct && (
+                <ProductDetailModal
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                    onProductSelect={setSelectedProduct}
+                />
+            )
+            }
         </>
     );
 }
