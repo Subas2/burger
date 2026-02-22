@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Minus, Star, Heart } from 'lucide-react';
+import { Plus, Minus, Star, Heart, ShoppingCart } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 import { useFavorites } from '../../context/FavoritesContext';
@@ -232,7 +232,7 @@ export default function ProductCard({ product, type, imageHeight = '100px', imag
                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                     >
-                        <Plus size={20} />
+                        <ShoppingCart size={18} />
                     </button>
                 </div>
             </div>

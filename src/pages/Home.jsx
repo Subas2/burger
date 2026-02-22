@@ -257,20 +257,6 @@ export default function Home() {
                                     minWidth: isSingleOffer ? '280px' : 'auto',
                                     margin: isSingleOffer ? '0 auto' : '0'
                                 }}>
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: '-10px',
-                                        right: '-10px',
-                                        background: 'var(--color-secondary)',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                        padding: '0.5rem 1rem',
-                                        borderRadius: '50px',
-                                        zIndex: 10,
-                                        boxShadow: '0 5px 15px rgba(255, 143, 171, 0.4)'
-                                    }}>
-                                        {product.discount}% OFF
-                                    </div>
                                     <ProductCard
                                         product={product}
                                         imageHeight={isSingleOffer ? '400px' : '300px'}
