@@ -1065,6 +1065,20 @@ function SettingsManager() {
                     </div>
                 </div>
 
+                <h3 style={{ fontSize: '1.1rem', opacity: 0.8, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginTop: '1rem' }}>Marketing Settings</h3>
+                <div className="admin-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', opacity: 0.8, fontSize: '0.9rem' }}>Limited Time Offers Countdown End (leave blank to hide)</label>
+                        <input
+                            type="datetime-local"
+                            className="admin-input"
+                            name="saleEndDate"
+                            value={formData.saleEndDate || ''}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                     <button type="submit" className="admin-btn btn-primary" style={{ minWidth: '150px' }}>
                         Save Settings

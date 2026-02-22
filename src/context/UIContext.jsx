@@ -36,7 +36,8 @@ export const UIProvider = ({ children }) => {
                 instagram: 'https://instagram.com',
                 twitter: 'https://twitter.com',
                 youtube: 'https://youtube.com',
-                heroVideo: ''
+                heroVideo: '',
+                saleEndDate: ''
             };
         } catch (e) {
             console.error("Failed to parse contact info from storage:", e);
@@ -48,7 +49,8 @@ export const UIProvider = ({ children }) => {
                 instagram: 'https://instagram.com',
                 twitter: 'https://twitter.com',
                 youtube: 'https://youtube.com',
-                heroVideo: ''
+                heroVideo: '',
+                saleEndDate: ''
             };
         }
     });

@@ -12,6 +12,7 @@ import PageTransition from '../components/layout/PageTransition';
 import ProductCard from '../components/ui/ProductCard';
 import ProductDetailModal from '../components/ui/ProductDetailModal';
 import Footer from '../components/layout/Footer.jsx';
+import Countdown from '../components/ui/Countdown';
 
 // Import 2D Assets
 import heroBurger from '../assets/hero-burger.png';
@@ -270,9 +271,14 @@ export default function Home() {
 
                     {/* Special Offers Banner */}
                     <div style={{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
-                        <h2 style={{ fontSize: '2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
-                        </h2>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                            <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+                                <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
+                            </h2>
+                            {contactInfo?.saleEndDate && (
+                                <Countdown endDate={contactInfo.saleEndDate} />
+                            )}
+                        </div>
                         <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
                             {/* Combine all, filter by discount */}
                             {offers.map(product => (
