@@ -18,7 +18,7 @@ export default function Home() {
     const { addToCart } = useCart();
     const { addToast } = useToast();
     const { getBurgers, getCakes, getBakeryItems, getBiscuits, getSweets } = useProducts();
-    const { heroImage, contactInfo } = useUI();
+    const { contactInfo } = useUI();
 
     // Product Modal State
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -62,40 +62,7 @@ export default function Home() {
                     paddingTop: '80px', // Add padding for Navbar
                     background: '#0a0a0a'
                 }}>
-                    {/* Video Background */}
-                    {contactInfo?.heroVideo && (
-                        <video
-                            src={contactInfo.heroVideo}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                zIndex: 0,
-                                opacity: 0.6
-                            }}
-                        />
-                    )}
 
-                    {/* Background Glow (Only if no video, or maybe overlay it?) - Keeping it for style but reducing opacity if video exists */}
-                    <div style={{
-                        position: 'absolute',
-                        top: '40%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '80vw',
-                        height: '80vw',
-                        background: 'radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 60%)',
-                        filter: 'blur(120px)',
-                        zIndex: 0,
-                        display: contactInfo?.heroVideo ? 'none' : 'block'
-                    }} />
 
                     {/* Gradient Overlay for texture */}
                     <div className="noise-overlay" style={{ opacity: 0.05 }} />
@@ -222,49 +189,49 @@ export default function Home() {
 
     {/* Special Offers Banner */ }
     < div style = {{ maxWidth: '1400px', margin: '0 auto 0.6rem auto', padding: '0 var(--padding-page)' }}>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
-                            <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
-                                <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
-                            </h2>
-                            {contactInfo?.saleEndDate && (
-                                <Countdown endDate={contactInfo.saleEndDate} />
-                            )}
-                        </div>
-                        <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
-                            {/* Combine all, filter by discount */}
-                            {offers.map(product => (
-                                <div key={product.id} style={{
-                                    position: 'relative',
-                                    width: isSingleOffer ? '100%' : 'auto',
-                                    maxWidth: isSingleOffer ? '500px' : 'none',
-                                    minWidth: isSingleOffer ? '280px' : 'auto',
-                                    margin: isSingleOffer ? '0 auto' : '0'
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                        <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+                            <span style={{ color: 'var(--color-secondary)' }}>🔥</span> Limited Time Offers
+                        </h2>
+                        {contactInfo?.saleEndDate && (
+                            <Countdown endDate={contactInfo.saleEndDate} />
+                        )}
+                    </div>
+                    <div className={isSingleOffer ? "" : "product-grid"} style={isSingleOffer ? { display: 'flex', justifyContent: 'center' } : {}}>
+                        {/* Combine all, filter by discount */}
+                        {offers.map(product => (
+                            <div key={product.id} style={{
+                                position: 'relative',
+                                width: isSingleOffer ? '100%' : 'auto',
+                                maxWidth: isSingleOffer ? '500px' : 'none',
+                                minWidth: isSingleOffer ? '280px' : 'auto',
+                                margin: isSingleOffer ? '0 auto' : '0'
+                            }}>
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '-10px',
+                                    right: '-10px',
+                                    background: 'var(--color-secondary)',
+                                    color: 'black',
+                                    fontWeight: 'bold',
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '50px',
+                                    zIndex: 10,
+                                    boxShadow: '0 5px 15px rgba(255, 143, 171, 0.4)'
                                 }}>
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: '-10px',
-                                        right: '-10px',
-                                        background: 'var(--color-secondary)',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                        padding: '0.5rem 1rem',
-                                        borderRadius: '50px',
-                                        zIndex: 10,
-                                        boxShadow: '0 5px 15px rgba(255, 143, 171, 0.4)'
-                                    }}>
-                                        {product.discount}% OFF
-                                    </div>
-                                    <ProductCard
-                                        product={product}
-                                        imageHeight={isSingleOffer ? '400px' : '300px'}
-                                        imageObjectFit="contain"
-                                        isBanner={isSingleOffer}
-                                        onClick={() => setSelectedProduct(product)}
-                                    />
+                                    {product.discount}% OFF
                                 </div>
-                            ))}
-                        </div>
-                    </div >
+                                <ProductCard
+                                    product={product}
+                                    imageHeight={isSingleOffer ? '400px' : '300px'}
+                                    imageObjectFit="contain"
+                                    isBanner={isSingleOffer}
+                                    onClick={() => setSelectedProduct(product)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div >
 
     {/* Best Sellers */ }
     < div style = {{ maxWidth: '1400px', margin: '0 auto 0.4rem auto', padding: '0 var(--padding-page)' }}>

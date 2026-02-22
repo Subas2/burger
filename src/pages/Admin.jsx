@@ -1014,56 +1014,6 @@ function SettingsManager() {
                     </div>
                 </div>
 
-                <h3 style={{ fontSize: '1.1rem', opacity: 0.8, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginTop: '1rem' }}>Landing Page Media</h3>
-                <div className="admin-grid" style={{ gridTemplateColumns: '1fr' }}>
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', opacity: 0.8, fontSize: '0.9rem' }}><PlayCircle size={14} /> Hero Background Video URL (MP4/WebM)</label>
-                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                            <input
-                                className="admin-input"
-                                name="heroVideo"
-                                value={formData.heroVideo || ''}
-                                onChange={handleChange}
-                                placeholder="https://example.com/video.mp4"
-                                style={{ flex: 1, minWidth: '200px' }}
-                            />
-                            <div style={{ opacity: 0.5, fontSize: '0.9rem' }}>OR</div>
-                            <label className="admin-btn btn-secondary" style={{ cursor: uploading ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', opacity: uploading ? 0.7 : 1 }}>
-                                {uploading ? (
-                                    <>Processing {progress}%...</>
-                                ) : (
-                                    <><Box size={16} /> Upload Video</>
-                                )}
-                                <input
-                                    type="file"
-                                    accept="video/*"
-                                    disabled={uploading}
-                                    onChange={handleVideoUpload}
-                                    style={{ display: 'none' }}
-                                />
-                            </label>
-                        </div>
-
-                        {/* Progress Bar */}
-                        {uploading && (
-                            <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '0.5rem', overflow: 'hidden' }}>
-                                <div style={{ width: `${progress}%`, height: '100%', background: 'var(--color-primary)', transition: 'width 0.2s' }} />
-                            </div>
-                        )}
-
-                        {/* Video Preview */}
-                        {formData.heroVideo && (
-                            <div style={{ marginTop: '1rem', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: 'black', maxWidth: '300px' }}>
-                                <div style={{ padding: '0.5rem', background: 'rgba(255,255,255,0.05)', fontSize: '0.8rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>Preview</div>
-                                <video src={formData.heroVideo} controls style={{ width: '100%', display: 'block' }} />
-                            </div>
-                        )}
-
-                        <p style={{ fontSize: '0.8rem', opacity: 0.5, marginTop: '0.5rem' }}>
-                            If provided, this video will play in the background of the Home Hero section.
-                        </p>
-                    </div>
-                </div>
 
                 <h3 style={{ fontSize: '1.1rem', opacity: 0.8, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginTop: '1rem' }}>Marketing Settings</h3>
                 <div className="admin-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
