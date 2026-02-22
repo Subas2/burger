@@ -234,7 +234,7 @@ export default function Home() {
                     marginTop: '0',
                     // scrollSnapAlign: 'start',
                     paddingBottom: '100px',
-                    paddingTop: '6rem'
+                    paddingTop: '2rem'
                 }}>
 
                     {/* Special Offers Banner */}
