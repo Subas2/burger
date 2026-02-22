@@ -127,7 +127,7 @@ export default function Home() {
                                     marginBottom: '2rem',
                                     fontFamily: 'var(--font-main)',
                                     color: 'white',
-                                    textShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                                    textShadow: '0 5px 15px rgba(0,0,0,0.5)'
                                 }}
                             >
                                 DIG IN.<br />
@@ -217,11 +217,11 @@ export default function Home() {
                             <motion.img
                                 src={heroCake}
                                 alt="Yummy Cake"
-                                initial={{ opacity: 0, scale: 0.6, x: 50 }}
+                                initial={{ opacity: 0, scale: 0.5, x: 50 }}
                                 // Floating Animation (Opposite phase)
                                 animate={{
                                     opacity: 1,
-                                    scale: 0.9,
+                                    scale: 0.7,
                                     x: 0,
                                     y: [0, 30, 0],
                                     rotate: [0, -5, 0]

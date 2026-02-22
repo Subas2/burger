@@ -18,6 +18,14 @@
   --border-radius: 16px;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  overscroll-behavior-x: none;
+}
+
 /* Responsive Product Grid */
 .product-grid {
   display: grid;
