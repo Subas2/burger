@@ -65,21 +65,12 @@ export default function Home() {
                     {/* Video Background */}
                     {contactInfo?.heroVideo && (
                         <video
+                            className="hero-video"
                             src={contactInfo.heroVideo}
                             autoPlay
                             loop
                             muted
                             playsInline
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                zIndex: 0,
-                                opacity: 0.6
-                            }}
                         />
                     )}
 
@@ -285,10 +276,25 @@ export default function Home() {
                       height: 100vh;
                   }
 
+                  .hero-video {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      z-index: 0;
+                      opacity: 0.6;
+                  }
+
                   @media (max-width: 968px) {
                     .hero-section {
                         height: 65vh !important;
                         min-height: 450px !important;
+                    }
+
+                    .hero-video {
+                        object-fit: contain !important;
                     }
 
                     .hero-grid {
