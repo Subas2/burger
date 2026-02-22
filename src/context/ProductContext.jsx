@@ -1,96 +1,120 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { burgers as initialBurgers, bakeryItems as initialBakery, cakes as initialCakes, biscuits as initialBiscuits, sweets as initialSweets } from '../data';
+import { supabase } from '../lib/supabase';
+import { useToast } from './ToastContext';
 
 const ProductContext = createContext();
 
 export function ProductProvider({ children }) {
-    // Initialize from localStorage or use default data
-    const [products, setProducts] = useState(() => {
-        try {
-            const saved = localStorage.getItem('burger_bakery_products');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    return parsed;
-                }
-            }
-        } catch (e) {
-            console.error("Failed to parse products from localStorage", e);
-            // Fallback to default
-        }
+    const [products, setProducts] = useState([]);
+    const { addToast } = useToast();
 
-        // Normalize data to a single array with type and default extended fields
-        const normalizedBurgers = (initialBurgers || []).map((b, index) => ({
-            ...b,
-            type: 'burger',
-            calories: 850,
-            rating: index === 0 ? 4.9 : 4.8,
-            reviews: index === 0 ? [
-                { id: 111, userId: 'u1', userName: 'Alice Freeman', rating: 5, comment: 'Best burger I have ever had! The buns are so soft 🍔', date: '2023-10-20T10:00:00Z' },
-                { id: 112, userId: 'u2', userName: 'Bob Smith', rating: 5, comment: 'Absolutely delicious. Highly recommend the extra cheese.', date: '2023-10-22T14:30:00Z' },
-                { id: 113, userId: 'u3', userName: 'Charlie', rating: 4, comment: 'Great flavor but delivery was a slightly late.', date: '2023-10-25T09:15:00Z' }
-            ] : []
-        }));
-        const normalizedBakery = (initialBakery || []).map(b => ({
-            ...b,
-            type: 'bakery',
-            calories: 320,
-            rating: 4.5,
-            reviews: []
-        }));
-        const normalizedCakes = (initialCakes || []).map(b => ({
-            ...b,
-            type: 'cake',
-            calories: 540,
-            rating: 4.9,
-            reviews: []
-        }));
-        const normalizedBiscuits = (initialBiscuits || []).map(b => ({
-            ...b,
-            type: 'biscuit',
-            calories: 200,
-            rating: 4.7,
-            reviews: []
-        }));
-        const normalizedSweets = (initialSweets || []).map(b => ({
-            ...b,
-            type: 'sweet',
-            calories: 150,
-            rating: 4.6,
-            reviews: []
-        }));
-        return [...normalizedBurgers, ...normalizedBakery, ...normalizedCakes, ...normalizedBiscuits, ...normalizedSweets];
-    });
-
+    // Fetch products from Supabase on mount
     useEffect(() => {
-        try {
-            localStorage.setItem('burger_bakery_products', JSON.stringify(products));
-        } catch (e) {
-            console.error("Failed to save products:", e);
-        }
-    }, [products]);
+        const fetchProducts = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('*')
+                    .order('id', { ascending: true });
 
-    const addProduct = (product) => {
-        const newProduct = {
-            ...product,
-            id: Date.now(),
-            // Ensure numeric types
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    // Normalize the data (convert raw_reviews JSONB back to reviews array if needed)
+                    const normalized = data.map(item => ({
+                        ...item,
+                        reviews: item.raw_reviews || []
+                    }));
+                    setProducts(normalized);
+                }
+            } catch (error) {
+                console.error('Error fetching products from Supabase:', error);
+                // Fallback to empty, but usually we would show an error toast here
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const addProduct = async (product) => {
+        const newProductData = {
+            name: product.name,
+            price: parseFloat(product.price) || 0,
+            description: product.description || '',
+            type: product.type || 'burger',
+            color: product.color || '#ff9f1c',
             calories: parseInt(product.calories) || 0,
             rating: parseFloat(product.rating) || 0,
             quantity: parseInt(product.quantity) || 1,
             discount: parseInt(product.discount) || 0,
-            reviews: []
+            image: product.image || '',
+            raw_reviews: []
         };
-        setProducts(prev => [...prev, newProduct]);
-        return newProduct;
+
+        try {
+            const { data, error } = await supabase
+                .from('products')
+                .insert([newProductData])
+                .select();
+
+            if (error) throw error;
+
+            if (data && data[0]) {
+                const savedProduct = { ...data[0], reviews: data[0].raw_reviews || [] };
+                setProducts(prev => [...prev, savedProduct]);
+                return savedProduct;
+            }
+        } catch (error) {
+            console.error('Error adding product to Supabase:', error);
+            addToast('Database Error: Could not save product', 'error');
+        }
     };
 
-    const updateProduct = (updatedProduct) => {
-        setProducts(prev => prev.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+    const updateProduct = async (updatedProduct) => {
+        const updateData = {
+            name: updatedProduct.name,
+            price: parseFloat(updatedProduct.price) || 0,
+            description: updatedProduct.description || '',
+            type: updatedProduct.type,
+            color: updatedProduct.color,
+            calories: parseInt(updatedProduct.calories) || 0,
+            rating: parseFloat(updatedProduct.rating) || 0,
+            quantity: parseInt(updatedProduct.quantity) || 0,
+            discount: parseInt(updatedProduct.discount) || 0,
+            image: updatedProduct.image || '',
+            raw_reviews: updatedProduct.reviews || [] // Sync reviews back
+        };
+
+        try {
+            const { error } = await supabase
+                .from('products')
+                .update(updateData)
+                .eq('id', updatedProduct.id);
+
+            if (error) throw error;
+
+            setProducts(prev => prev.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+        } catch (error) {
+            console.error('Error updating product in Supabase:', error);
+            addToast('Database Error: Could not update product', 'error');
+        }
     };
 
-    const deleteProduct = (id) => {
-        setProducts(prev => prev.filter(p => p.id !== id));
+    const deleteProduct = async (id) => {
+        try {
+            const { error } = await supabase
+                .from('products')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+
+            setProducts(prev => prev.filter(p => p.id !== id));
+            addToast('Product successfully deleted', 'success');
+        } catch (error) {
+            console.error('Error deleting product from Supabase:', error);
+            addToast('Database Error: Could not delete product', 'error');
+        }
     };
 
     const getBurgers = () => products.filter(p => p.type === 'burger');

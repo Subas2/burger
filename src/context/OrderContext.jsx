@@ -1,75 +1,95 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import { supabase } from '../lib/supabase';
 
 const OrderContext = createContext();
-
-// Connect to the new backend server (looks for env var, falls back to local)
-const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
-const socket = io(SOCKET_URL);
 
 export function OrderProvider({ children }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        // Handle connection events
-        socket.on('connect', () => {
-            console.log('Connected to Real-Time Backend');
-        });
+        const fetchOrders = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('orders')
+                    .select('*')
+                    .order('date', { ascending: false });
 
-        // Receive initial orders from DB
-        socket.on('initialOrders', (data) => {
-            setOrders(data);
-        });
-
-        // Listen for new orders (e.g., from other customers)
-        socket.on('orderAdded', (newOrder) => {
-            setOrders((prev) => [newOrder, ...prev]);
-        });
-
-        // Listen for order status updates (e.g., from Admin)
-        socket.on('orderUpdated', ({ orderId, status }) => {
-            setOrders((prev) => prev.map(order =>
-                order.id === orderId ? { ...order, status } : order
-            ));
-        });
-
-        // Listen for deletions
-        socket.on('orderDeleted', (orderId) => {
-            setOrders((prev) => prev.filter(order => order.id !== orderId));
-        });
-
-        return () => {
-            socket.off('connect');
-            socket.off('initialOrders');
-            socket.off('orderAdded');
-            socket.off('orderUpdated');
-            socket.off('orderDeleted');
+                if (error) throw error;
+                if (data) {
+                    setOrders(data);
+                }
+            } catch (err) {
+                console.error('Error fetching orders:', err);
+            }
         };
+        fetchOrders();
     }, []);
 
-    const addOrder = (order) => {
-        // Optimistic UI update
-        setOrders(prev => [order, ...prev]);
-        // Send to backend
-        socket.emit('newOrder', order);
+    const addOrder = async (order) => {
+        try {
+            const { data, error } = await supabase
+                .from('orders')
+                .insert([order])
+                .select();
+
+            if (error) throw error;
+            if (data && data[0]) {
+                setOrders(prev => [data[0], ...prev]);
+                return data[0];
+            }
+        } catch (err) {
+            console.error('Error adding order:', err);
+            throw err;
+        }
     };
 
-    const updateOrderStatus = (orderId, status) => {
-        setOrders(prev => prev.map(order =>
-            order.id === orderId ? { ...order, status } : order
-        ));
-        socket.emit('updateOrderStatus', { orderId, status });
+    const updateOrderStatus = async (orderId, status) => {
+        try {
+            const { error } = await supabase
+                .from('orders')
+                .update({ status })
+                .eq('id', orderId);
+
+            if (error) throw error;
+
+            setOrders(prev => prev.map(order =>
+                order.id === orderId ? { ...order, status } : order
+            ));
+        } catch (err) {
+            console.error('Error updating order:', err);
+        }
     };
 
-    const deleteOrder = (orderId) => {
-        setOrders(prev => prev.filter(order => order.id !== orderId));
-        socket.emit('deleteOrder', orderId);
+    const deleteOrder = async (orderId) => {
+        try {
+            const { error } = await supabase
+                .from('orders')
+                .delete()
+                .eq('id', orderId);
+
+            if (error) throw error;
+
+            setOrders(prev => prev.filter(order => order.id !== orderId));
+        } catch (err) {
+            console.error('Error deleting order:', err);
+        }
     };
 
-    const hideOrder = (orderId) => {
-        setOrders(prev => prev.map(order =>
-            order.id === orderId ? { ...order, hidden: true } : order
-        ));
+    const hideOrder = async (orderId) => {
+        try {
+            const { error } = await supabase
+                .from('orders')
+                .update({ hidden: true })
+                .eq('id', orderId);
+
+            if (error) throw error;
+
+            setOrders(prev => prev.map(order =>
+                order.id === orderId ? { ...order, hidden: true } : order
+            ));
+        } catch (err) {
+            console.error('Error hiding order:', err);
+        }
     };
 
     return (

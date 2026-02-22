@@ -35,8 +35,8 @@ const NavbarWrapper = () => {
 function App() {
   // Providers wrapped: Product > Toast > Favorites > Promo > Shipping > UI > Order > Cart
   return (
-    <ProductProvider>
-      <ToastProvider>
+    <ToastProvider>
+      <ProductProvider>
         <FavoritesProvider>
           <PromoCodeProvider>
             <ShippingProvider>
@@ -65,8 +65,8 @@ function App() {
             </ShippingProvider>
           </PromoCodeProvider>
         </FavoritesProvider>
-      </ToastProvider>
-    </ProductProvider>
+      </ProductProvider>
+    </ToastProvider>
   );
 }
 

@@ -86,7 +86,7 @@ export default function Checkout() {
     const shippingCost = getShippingCost(totalPrice - discount);
     const finalTotal = Math.max(0, totalPrice - discount + shippingCost);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
@@ -97,8 +97,7 @@ export default function Checkout() {
             return;
         }
 
-        // Simulate API call
-        setTimeout(() => {
+        try {
             // Generate random Order ID
             const orderId = Math.floor(100000 + Math.random() * 900000);
 
@@ -109,17 +108,13 @@ export default function Checkout() {
                 items: [...items],
                 total: finalTotal,
                 status: 'preparing',
-                shippingDetails: { ...formData }, // includes phone
+                shipping_details: { ...formData }, // Mapping to snake_case for DB
                 location: location,
-                appliedPromo: appliedCode,
+                applied_promo: appliedCode, // Mapping to snake_case for DB
                 discount: discount
             };
-            addOrder(newOrder);
 
-            // Update Promo Usage
-            if (appliedCode) {
-                incrementPromoUsage(appliedCode);
-            }
+            await addOrder(newOrder);
 
             // Mark as existing customer
             localStorage.setItem('first_order_placed', 'true');
@@ -127,7 +122,11 @@ export default function Checkout() {
             clearCart();
             addToast(`Order #${orderId} placed successfully! 🍔`, 'success');
             setLocation(`/track-order/${orderId}`);
-        }, 1500);
+        } catch (error) {
+            console.error('Error placing order:', error);
+            addToast('Failed to place order. Please try again.', 'error');
+            setIsSubmitting(false);
+        }
     };
 
     if (items.length === 0) {

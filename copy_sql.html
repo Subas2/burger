@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <button id="copy" style="font-size:24px; padding:10px;">Copy SQL to Clipboard</button>
+    <div id="status"></div>
+    <script>
+        document.getElementById('copy').addEventListener('click', async () => {
+            try {
+                const req = await fetch('all_setup.sql');
+                const sql = await req.text();
+                await navigator.clipboard.writeText(sql);
+                document.getElementById('status').innerText = 'Copied!';
+            } catch (e) {
+                document.getElementById('status').innerText = 'Failed: ' + e;
+            }
+        });
+    </script>
+</body>
+
+</html>

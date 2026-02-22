@@ -895,7 +895,7 @@ function SettingsManager() {
     const [uploading, setUploading] = useState(false);
     const [progress, setProgress] = useState(0);
 
-    const handleVideoUpload = (e) => {
+    const handleVideoUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
 
@@ -905,25 +905,32 @@ function SettingsManager() {
         }
 
         setUploading(true);
-        setProgress(0);
+        setProgress(50);
 
-        const reader = new FileReader();
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'burger_bakery_assets');
 
-        reader.onprogress = (data) => {
-            if (data.lengthComputable) {
-                const progressEvent = Math.round((data.loaded / data.total) * 100);
-                setProgress(progressEvent);
+        try {
+            const response = await fetch('https://api.cloudinary.com/v1_1/dngibvt2q/video/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.secure_url) {
+                setFormData(prev => ({ ...prev, heroVideo: data.secure_url }));
+                setProgress(100);
+                addToast('Video uploaded to cloud! CLICK "SAVE SETTINGS" NOW to apply.', 'success');
+            } else {
+                addToast('Failed to upload video to cloud', 'error');
             }
-        };
-
-        reader.onloadend = () => {
-            setFormData({ ...formData, heroVideo: reader.result });
+        } catch (error) {
+            console.error('Upload error:', error);
+            addToast('Error uploading video', 'error');
+        } finally {
             setUploading(false);
-            setProgress(100);
-            addToast('Video processed! CLICK "SAVE SETTINGS" NOW to apply.', 'success');
-        };
-
-        reader.readAsDataURL(file);
+        }
     };
 
     return (
