@@ -190,31 +190,10 @@ export default function Home() {
                         </div>
 
                         {/* 2D Assets Animation Container */}
-                        <div style={{ position: 'relative', height: '600px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {/* Burger - Main Hero */}
-                            <motion.img
-                                src={heroImage || heroBurger}
-                                alt="Delicious Burger"
-                                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                                // Floating Animation
-                                animate={{
-                                    opacity: 1,
-                                    scale: 1,
-                                    y: [0, -25, 0],
-                                    rotate: [0, 2, 0]
-                                }}
-                                transition={{
-                                    duration: 6,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    opacity: { duration: 0.8, delay: 0.2 },
-                                    scale: { duration: 0.8, delay: 0.2 }
-                                }}
-                                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                            />
-
+                        <div className="hero-images-container" style={{ position: 'relative', height: '600px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {/* Cake - Background Element */}
                             <motion.img
+                                className="hero-cake-img"
                                 src={heroCake}
                                 alt="Yummy Cake"
                                 initial={{ opacity: 0, scale: 0.5, x: 50 }}
@@ -235,7 +214,28 @@ export default function Home() {
                                     scale: { duration: 0.8, delay: 0.4 },
                                     x: { duration: 0.8, delay: 0.4 }
                                 }}
-                                style={{ zIndex: 0 }}
+                            />
+
+                            {/* Burger - Main Hero */}
+                            <motion.img
+                                className="hero-burger-img"
+                                src={heroImage || heroBurger}
+                                alt="Delicious Burger"
+                                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                                // Floating Animation
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                    y: [0, -25, 0],
+                                    rotate: [0, 2, 0]
+                                }}
+                                transition={{
+                                    duration: 6,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    opacity: { duration: 0.8, delay: 0.2 },
+                                    scale: { duration: 0.8, delay: 0.2 }
+                                }}
                             />
                         </div>
                     </div>
@@ -378,16 +378,25 @@ export default function Home() {
                         justify-content: center;
                     }
                     
-                    div[style*="maxWidth: 600px"] {
-                        width: 90% !important;
-                        max-width: 400px !important;
+                    /* Mobile Responsive Images - Show both diagonally */
+                    .hero-images-container {
+                        height: 400px !important;
+                        align-items: flex-end !important;
+                        justify-content: flex-start !important;
                     }
-                    div[style*="maxWidth: 350px"] {
-                         /* Hide secondary item on mobile or make very small */
-                         width: 30% !important;
-                         right: 0 !important;
-                         top: 10% !important;
-                         display: none;
+                    
+                    .hero-burger-img {
+                        max-width: 65% !important;
+                        margin-bottom: 2rem;
+                        z-index: 2;
+                    }
+                    
+                    .hero-cake-img {
+                        max-width: 55% !important;
+                        right: 0 !important;
+                        top: 20% !important;
+                        z-index: 1;
+                        display: block !important;
                     }
                     
                      /* Button Center */
