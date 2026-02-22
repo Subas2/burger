@@ -216,17 +216,15 @@ export default function ProductCard({ product, type, imageHeight = '100px', imag
                             setQuantity(1);
                         }}
                         style={{
-                            background: accentColor,
-                            color: isBurger ? 'white' : 'black',
+                            background: 'transparent',
+                            color: accentColor,
                             width: '38px',
                             height: '38px',
-                            borderRadius: '50%',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             border: 'none',
                             cursor: 'pointer',
-                            boxShadow: `0 4px 12px ${product.color} 30`,
                             transition: 'transform 0.2s'
                         }}
                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}

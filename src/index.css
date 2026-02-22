@@ -104,13 +104,15 @@ body {
   }
 
   .product-add-btn {
-    width: 24px !important;
-    height: 24px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
   }
 
   .product-add-btn svg {
-    width: 12px !important;
-    height: 12px !important;
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .product-fav-btn {
